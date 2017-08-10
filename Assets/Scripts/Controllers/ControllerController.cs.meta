@@ -1,10 +1,30 @@
 fileFormatVersion: 2
 guid: d9b1decaddbe62a47b370fa902af86ea
-timeCreated: 1500716836
+timeCreated: 1502398176
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - menu: {instanceID: 0}
+  - cursor: {instanceID: 0}
+  - setting: {instanceID: 0}
+  - choises1: {instanceID: 0}
+  - choises2: {instanceID: 0}
+  - choises3: {instanceID: 0}
+  - choises4: {instanceID: 0}
+  - back: {instanceID: 0}
+  - settingModeSprite: {fileID: 21300000, guid: 94a90d1d3a25b0d4cb4c656134b9d491,
+      type: 3}
+  - settingObjectModeSprite: {fileID: 21300000, guid: 7612b3c1610256e489cfb718271ecb33,
+      type: 3}
+  - choiseObjectSprite: {fileID: 21300000, guid: c05ea96abf96f934785c97d20326e28c,
+      type: 3}
+  - choiseEditSprite: {fileID: 21300000, guid: 26db65c370b36f64a9bb12d1f8461bb3, type: 3}
+  - choiseSelectSprite: {fileID: 21300000, guid: 44e53efbdf5b0fe45b998f37c161b401,
+      type: 3}
+  - choiseCreateNewSprite: {fileID: 21300000, guid: fbeb25705c84f7741b9e7107cd92f5ce,
+      type: 3}
+  - back2x1Sprite: {fileID: 21300000, guid: 275825e27a1a77e48a214b079d2cfe5e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
