@@ -58,9 +58,23 @@ public abstract class MenuState
 #region Open/closed states
 
 /// <summary>
+/// Represents whether menu is open or closed.
+/// </summary>
+public abstract class MenuOpenState : MenuState
+{
+	public MenuOpenState(ControllerController cc) : base(cc) {}
+
+	/// <summary>
+	/// Assume this method is called when controller hits an object.
+	/// </summary>
+	/// <param name="collider">Collider</param>
+	public abstract void OnTriggerEnter(Collider collider);
+}
+
+/// <summary>
 /// Menu is closed.
 /// </summary>
-public class MenuStateClosed : MenuState
+public class MenuStateClosed : MenuOpenState
 {
 	public MenuStateClosed(ControllerController cc) : base(cc) { }
 
@@ -71,9 +85,26 @@ public class MenuStateClosed : MenuState
 	/// </summary>
 	public override void Update()
 	{
+		if (cc.tool != null)
+		{
+			cc.tool.Update();
+		}
+
 		if (cc.Controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
 		{
 			cc.menuOpenState = new MenuStateOpening(cc);
+		}
+	}
+
+	/// <summary>
+	/// Relay OnTriggerEnter messages to currently used tool.
+	/// </summary>
+	/// <param name="collider">Collider</param>
+	public override void OnTriggerEnter(Collider collider)
+	{
+		if (cc.tool != null)
+		{
+			cc.tool.OnTriggerEnter(collider);
 		}
 	}
 }
@@ -81,7 +112,7 @@ public class MenuStateClosed : MenuState
 /// <summary>
 /// Menu is opening.
 /// </summary>
-public class MenuStateOpening : MenuState
+public class MenuStateOpening : MenuOpenState
 {
 	public MenuStateOpening(ControllerController cc) : base(cc) { }
 
@@ -102,12 +133,14 @@ public class MenuStateOpening : MenuState
 			cc.menuOpenState = new MenuStateOpened(cc);
 		}
 	}
+
+	public override void OnTriggerEnter(Collider collider) { }
 }
 
 /// <summary>
 /// Menu is open.
 /// </summary>
-public class MenuStateOpened : MenuState
+public class MenuStateOpened : MenuOpenState
 {
 	public MenuStateOpened(ControllerController cc) : base(cc) { }
 
@@ -126,12 +159,14 @@ public class MenuStateOpened : MenuState
 			cc.menuOpenState = new MenuStateClosing(cc);
 		}
 	}
+
+	public override void OnTriggerEnter(Collider collider) { }
 }
 
 /// <summary>
 /// Menu is closing.
 /// </summary>
-public class MenuStateClosing : MenuState
+public class MenuStateClosing : MenuOpenState
 {
 	public MenuStateClosing(ControllerController cc) : base(cc) { }
 
@@ -152,6 +187,8 @@ public class MenuStateClosing : MenuState
 			cc.menuOpenState = new MenuStateClosed(cc);
 		}
 	}
+
+	public override void OnTriggerEnter(Collider collider) { }
 }
 
 #endregion
@@ -296,6 +333,7 @@ public class MenuStateObjectMode : MenuState
 				if (cc.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
 				{
 					cc.menuOpenState = new MenuStateClosing(cc);
+					cc.tool = new SelectObjectTool(cc);
 				}
 			}
 			else if (trackpad.x < 0.75f && trackpad.x > 0.25f && trackpad.y < 0.25f && trackpad.y > -0.25f)
@@ -330,6 +368,10 @@ public class MenuStateObjectMode : MenuState
 		}
 	}
 }
+
+#endregion
+
+#region Effect states
 
 /// <summary>
 /// Fade menu elements out.

@@ -5,10 +5,12 @@ using UnityEngine;
 /// <summary>
 /// Controls the Vive controllers' actions
 /// </summary>
-public class ControllerController : MonoBehaviour {
-
-	public MenuState menuOpenState;
+public class ControllerController : MonoBehaviour
+{
+	public MenuOpenState menuOpenState;
 	public MenuState menuSettingState;
+	public Tool tool;
+	public WireframeRenderer wireframeRenderer;
 
 	[HideInInspector] public GameObject menu;
 	[HideInInspector] public GameObject cursor;
@@ -76,5 +78,10 @@ public class ControllerController : MonoBehaviour {
 		{
 			cursor.SetActive(false);
 		}
+	}
+
+	private void OnTriggerEnter(Collider collider)
+	{
+		menuOpenState.OnTriggerEnter(collider);
 	}
 }
