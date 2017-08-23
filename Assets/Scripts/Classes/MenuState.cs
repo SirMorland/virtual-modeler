@@ -177,6 +177,8 @@ public class MenuStateClosing : MenuOpenState
 	/// </summary>
 	public override void Update()
 	{
+		cc.menuSettingState.Update();
+
 		if (cc.menu.transform.localScale.y > 0f)
 		{
 			cc.menu.transform.localScale -= new Vector3(0f, Time.deltaTime * 0.5f, Time.deltaTime * 0.5f);
@@ -315,7 +317,7 @@ public class MenuStateObjectMode : MenuState
 
 	/// <summary>
 	/// Play float animations on hover over butttons.
-	/// Close the menu if select-button is pressed.
+	/// Select "Select object" -tool and close menu if select-button is pressed.
 	/// Go back to mode selection if back-button is pressed.
 	/// </summary>
 	public override void Update()
@@ -342,7 +344,7 @@ public class MenuStateObjectMode : MenuState
 				FloatUp(choise2Transform, choise2Renderer);
 				FloatDown(backTransform, backRenderer);
 			}
-			else if (trackpad.x < 0.25f && trackpad.x > -0.25f && trackpad.y < -0.5f && trackpad.y > -1f)
+			else if (trackpad.x < 0.125f && trackpad.x > -0.125f && trackpad.y < -0.625f && trackpad.y > -0.875f)
 			{
 				FloatDown(choise1Transform, choise1Renderer);
 				FloatDown(choise2Transform, choise2Renderer);
@@ -364,6 +366,130 @@ public class MenuStateObjectMode : MenuState
 		{
 			FloatDown(choise1Transform, choise1Renderer);
 			FloatDown(choise2Transform, choise2Renderer);
+			FloatDown(backTransform, backRenderer);
+		}
+	}
+}
+
+/// <summary>
+/// Select object tool.
+/// </summary>
+public class MenuStateObject : MenuState
+{
+	Transform choise1Transform;
+	Transform choise2Transform;
+	Transform choise3Transform;
+	Transform choise4Transform;
+	Transform backTransform;
+
+	SpriteRenderer choise1Renderer;
+	SpriteRenderer choise2Renderer;
+	SpriteRenderer choise3Renderer;
+	SpriteRenderer choise4Renderer;
+	SpriteRenderer backRenderer;
+
+	/// <summary>
+	/// Create new menu state for object tool selection.
+	/// </summary>
+	/// <param name="cc">Vive controller controller</param>
+	public MenuStateObject(ControllerController cc) : base(cc)
+	{
+		choise1Transform = cc.choises1.transform;
+		choise2Transform = cc.choises2.transform;
+		choise3Transform = cc.choises3.transform;
+		choise4Transform = cc.choises4.transform;
+		backTransform = cc.back.transform;
+
+		choise1Renderer = choise1Transform.GetComponent<SpriteRenderer>();
+		choise2Renderer = choise2Transform.GetComponent<SpriteRenderer>();
+		choise3Renderer = choise3Transform.GetComponent<SpriteRenderer>();
+		choise4Renderer = choise4Transform.GetComponent<SpriteRenderer>();
+		backRenderer = backTransform.GetComponent<SpriteRenderer>();
+	}
+
+	/// <summary>
+	/// Change all the sprites
+	/// </summary>
+	public override void Init()
+	{
+		cc.setting.GetComponent<SpriteRenderer>().sprite = cc.settingObjectSprite;
+		choise1Renderer.sprite = cc.choiseTransformObjectSprite;
+		choise2Renderer.sprite = cc.choiseEditObjectSprite;
+		choise3Renderer.sprite = cc.choiseDublicateObjectSprite;
+		choise4Renderer.sprite = cc.choiseDeleteObjectSprite;
+		backRenderer.sprite = cc.back2x2Sprite;
+	}
+
+	/// <summary>
+	/// Play float animations on hover over butttons.
+	/// Go back to object mode tool selection if back-button is pressed.
+	/// </summary>
+	public override void Update()
+	{
+		if (cc.Controller.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
+		{
+			Vector2 trackpad = cc.Controller.GetAxis(Valve.VR.EVRButtonId.k_EButton_Axis0);
+
+			if (trackpad.x < -0.125f && trackpad.x > -0.625f && trackpad.y < 0.625f && trackpad.y > 0.125f)
+			{
+				FloatUp(choise1Transform, choise1Renderer);
+				FloatDown(choise2Transform, choise2Renderer);
+				FloatDown(choise3Transform, choise3Renderer);
+				FloatDown(choise4Transform, choise4Renderer);
+				FloatDown(backTransform, backRenderer);
+			}
+			else if (trackpad.x < 0.625f && trackpad.x > 0.125f && trackpad.y < 0.625f && trackpad.y > 0.125f)
+			{
+				FloatDown(choise1Transform, choise1Renderer);
+				FloatUp(choise2Transform, choise2Renderer);
+				FloatDown(choise3Transform, choise3Renderer);
+				FloatDown(choise4Transform, choise4Renderer);
+				FloatDown(backTransform, backRenderer);
+			}
+			else if (trackpad.x < -0.125f && trackpad.x > -0.625f && trackpad.y < -0.125f && trackpad.y > -0.625f)
+			{
+				FloatDown(choise1Transform, choise1Renderer);
+				FloatDown(choise2Transform, choise2Renderer);
+				FloatUp(choise3Transform, choise3Renderer);
+				FloatDown(choise4Transform, choise4Renderer);
+				FloatDown(backTransform, backRenderer);
+			}
+			else if (trackpad.x < 0.625f && trackpad.x > 0.125f && trackpad.y < -0.125f && trackpad.y > -0.625f)
+			{
+				FloatDown(choise1Transform, choise1Renderer);
+				FloatDown(choise2Transform, choise2Renderer);
+				FloatDown(choise3Transform, choise3Renderer);
+				FloatUp(choise4Transform, choise4Renderer);
+				FloatDown(backTransform, backRenderer);
+			}
+			else if (trackpad.x < 0.125f && trackpad.x > -0.125f && trackpad.y < -0.75f && trackpad.y > -1f)
+			{
+				FloatDown(choise1Transform, choise1Renderer);
+				FloatDown(choise2Transform, choise2Renderer);
+				FloatDown(choise3Transform, choise3Renderer);
+				FloatDown(choise4Transform, choise4Renderer);
+				FloatUp(backTransform, backRenderer);
+
+				if (cc.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+				{
+					cc.menuSettingState = new MenuStateFadeOut(cc, new MenuStateObjectMode(cc));
+				}
+			}
+			else
+			{
+				FloatDown(choise1Transform, choise1Renderer);
+				FloatDown(choise2Transform, choise2Renderer);
+				FloatDown(choise3Transform, choise3Renderer);
+				FloatDown(choise4Transform, choise4Renderer);
+				FloatDown(backTransform, backRenderer);
+			}
+		}
+		else
+		{
+			FloatDown(choise1Transform, choise1Renderer);
+			FloatDown(choise2Transform, choise2Renderer);
+			FloatDown(choise3Transform, choise3Renderer);
+			FloatDown(choise4Transform, choise4Renderer);
 			FloatDown(backTransform, backRenderer);
 		}
 	}
@@ -464,11 +590,10 @@ public class MenuStateFadeIn : MenuState
 	/// </summary>
 	public override void Update()
 	{
-		state.Update();
-
+		float speed = Time.deltaTime * 10f;
 		for (int i = 0; i < renderers.Length; i++)
 		{
-			renderers[i].color = Color.Lerp(renderers[i].color, new Color(1, 1, 1, 1), Time.deltaTime * 10f);
+			renderers[i].color = Color.Lerp(renderers[i].color, new Color(1, 1, 1, 1), speed);
 		}
 
 		if (renderers[0].color.a > 0.9)

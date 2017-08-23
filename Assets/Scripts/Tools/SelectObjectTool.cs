@@ -16,8 +16,8 @@ public class SelectObjectTool : Tool
 
 	/// <summary>
 	/// Select the collided object.
-	/// First return the previously selected object to default layer
-	/// and then move the collided object to wireframe layer.
+	/// First return the previously selected object to default layer and move the collided object to wireframe layer.
+	/// Then open Object menu.
 	/// </summary>
 	/// <param name="collider"></param>
 	public override void OnTriggerEnter(Collider collider)
@@ -29,5 +29,9 @@ public class SelectObjectTool : Tool
 		CommonInformationHolder.selectedObject = collider.gameObject;
 		collider.gameObject.layer = WIREFRAME_LAYER;
 		cc.wireframeRenderer.material = collider.gameObject.GetComponent<MeshRenderer>().material;
+
+		cc.menuOpenState = new MenuStateOpening(cc);
+		cc.menuSettingState = new MenuStateObject(cc);
+		cc.menuSettingState.Init();
 	}
 }

@@ -22,14 +22,21 @@ public class ControllerController : MonoBehaviour
 	[HideInInspector] public GameObject back;
 
 	public Sprite settingModeSprite;
-	public Sprite settingObjectModeSprite;
-
 	public Sprite choiseObjectSprite;
 	public Sprite choiseEditSprite;
+
+	public Sprite settingObjectModeSprite;
 	public Sprite choiseSelectSprite;
 	public Sprite choiseCreateNewSprite;
 
+	public Sprite settingObjectSprite;
+	public Sprite choiseTransformObjectSprite;
+	public Sprite choiseEditObjectSprite;
+	public Sprite choiseDublicateObjectSprite;
+	public Sprite choiseDeleteObjectSprite;
+
 	public Sprite back2x1Sprite;
+	public Sprite back2x2Sprite;
 
 	private SteamVR_TrackedObject trackedObj;
 	public SteamVR_Controller.Device Controller
