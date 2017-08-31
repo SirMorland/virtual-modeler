@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the Vive controllers' actions
@@ -20,6 +21,9 @@ public class ControllerController : MonoBehaviour
 	[HideInInspector] public GameObject choises3;
 	[HideInInspector] public GameObject choises4;
 	[HideInInspector] public GameObject back;
+
+	[HideInInspector] public GameObject display;
+	[HideInInspector] public Text displayText;
 
 	public Sprite settingModeSprite;
 	public Sprite choiseObjectSprite;
@@ -61,6 +65,9 @@ public class ControllerController : MonoBehaviour
 		choises3 = choises.GetChild(2).gameObject;
 		choises4 = choises.GetChild(3).gameObject;
 		back = menu.transform.GetChild(3).GetChild(0).gameObject;
+
+		display = transform.GetChild(1).gameObject;
+		displayText = display.transform.GetChild(0).GetChild(0).GetComponent<Text>();
 
 		menuOpenState = new MenuStateOpened(this);
 		menuSettingState = new MenuStateMode(this);

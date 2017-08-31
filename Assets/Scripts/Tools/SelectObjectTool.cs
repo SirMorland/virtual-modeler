@@ -10,28 +10,53 @@ public class SelectObjectTool : Tool
 {
 	const int WIREFRAME_LAYER = 8;
 
-	public SelectObjectTool(ControllerController cc) : base(cc) { }
+	/// <summary>
+	/// Unselect selected object.
+	/// </summary>
+	/// <param name="cc"></param>
+	public SelectObjectTool(ControllerController cc) : base(cc)
+	{
+		Unselect();
+	}
 
 	public override void Update() { }
 
 	/// <summary>
 	/// Select the collided object.
-	/// First return the previously selected object to default layer and move the collided object to wireframe layer.
 	/// Then open Object menu.
 	/// </summary>
 	/// <param name="collider"></param>
 	public override void OnTriggerEnter(Collider collider)
 	{
-		if (CommonInformationHolder.selectedObject)
-		{
-			CommonInformationHolder.selectedObject.layer = 0;
-		}
-		CommonInformationHolder.selectedObject = collider.gameObject;
-		collider.gameObject.layer = WIREFRAME_LAYER;
-		cc.wireframeRenderer.material = collider.gameObject.GetComponent<MeshRenderer>().material;
+		SelectObject(collider.gameObject, cc);
 
 		cc.menuOpenState = new MenuStateOpening(cc);
 		cc.menuSettingState = new MenuStateObject(cc);
 		cc.menuSettingState.Init();
+	}
+
+	/// <summary>
+	/// First unselect selected object and move the given game object to wireframe layer.
+	/// </summary>
+	/// <param name="gameObject"></param>
+	/// <param name="cc"></param>
+	public static void SelectObject(GameObject gameObject, ControllerController cc)
+	{
+		Unselect();
+		CommonInformationHolder.selectedObject = gameObject;
+		gameObject.layer = WIREFRAME_LAYER;
+		cc.wireframeRenderer.material = gameObject.GetComponent<MeshRenderer>().material;
+	}
+
+	/// <summary>
+	/// Return selected object to default layer and change selected object to null.
+	/// </summary>
+	static void Unselect()
+	{
+		if (CommonInformationHolder.selectedObject)
+		{
+			CommonInformationHolder.selectedObject.layer = 0;
+			CommonInformationHolder.selectedObject = null;
+		}
 	}
 }

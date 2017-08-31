@@ -237,6 +237,7 @@ public class MenuStateMode : MenuState
 	/// <summary>
 	/// Play float animations on hover over butttons.
 	/// Go to object mode if object-button is pressed.
+	/// Select "Edit" -tool and close menu if edit-button is pressed.
 	/// </summary>
 	public override void Update()
 	{
@@ -259,6 +260,12 @@ public class MenuStateMode : MenuState
 			{
 				FloatDown(choise1Transform, choise1Renderer);
 				FloatUp(choise2Transform, choise2Renderer);
+
+				if (cc.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+				{
+					cc.menuOpenState = new MenuStateClosing(cc);
+					cc.tool = new EditObjectTool(cc);
+				}
 			}
 			else
 			{
@@ -422,6 +429,7 @@ public class MenuStateObject : MenuState
 
 	/// <summary>
 	/// Play float animations on hover over butttons.
+	/// Select "Edit" -tool and close menu if edit-button is pressed.
 	/// Go back to object mode tool selection if back-button is pressed.
 	/// </summary>
 	public override void Update()
@@ -445,6 +453,12 @@ public class MenuStateObject : MenuState
 				FloatDown(choise3Transform, choise3Renderer);
 				FloatDown(choise4Transform, choise4Renderer);
 				FloatDown(backTransform, backRenderer);
+
+				if (cc.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
+				{
+					cc.menuOpenState = new MenuStateClosing(cc);
+					cc.tool = new EditObjectTool(cc);
+				}
 			}
 			else if (trackpad.x < -0.125f && trackpad.x > -0.625f && trackpad.y < -0.125f && trackpad.y > -0.625f)
 			{

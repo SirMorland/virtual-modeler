@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 1d964c6c4cab4c84b9f0a8e3ea7f3026
-timeCreated: 1504094295
+guid: 2fd6e718c1cea544cb955601f499da2d
+timeCreated: 1504092305
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
-    sRGBTexture: 1
+    enableMipMap: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -17,7 +17,7 @@ TextureImporter:
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
-    convertToNormalMap: 0
+    convertToNormalMap: 1
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
@@ -33,30 +33,30 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
-  nPOTScale: 0
+    wrapU: -1
+    wrapV: -1
+    wrapW: -1
+  nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
-  spriteExtrude: 0
-  spriteMeshType: 0
+  spriteMode: 0
+  spriteExtrude: 1
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 32, y: 32, z: 32, w: 32}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 1
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -64,7 +64,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -72,7 +72,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -80,7 +80,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Tizen
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -88,7 +88,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Windows Store Apps
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -96,7 +96,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -104,7 +104,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Samsung TV
-    maxTextureSize: 2048
+    maxTextureSize: 128
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -114,46 +114,7 @@ TextureImporter:
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline:
-    - - {x: 246, y: -251}
-      - {x: 251, y: -245}
-      - {x: 251, y: -244}
-      - {x: 255, y: -239}
-      - {x: 255, y: -237}
-      - {x: 256, y: -236}
-      - {x: 256, y: 236}
-      - {x: 255, y: 237}
-      - {x: 255, y: 239}
-      - {x: 253, y: 242}
-      - {x: 251, y: 246}
-      - {x: 245, y: 251}
-      - {x: 244, y: 251}
-      - {x: 239, y: 255}
-      - {x: 237, y: 255}
-      - {x: 236, y: 256}
-      - {x: -236, y: 256}
-      - {x: -237, y: 255}
-      - {x: -239, y: 255}
-      - {x: -242, y: 253}
-      - {x: -246, y: 251}
-      - {x: -251, y: 245}
-      - {x: -251, y: 244}
-      - {x: -255, y: 239}
-      - {x: -256, y: 237}
-      - {x: -256, y: -236}
-      - {x: -255, y: -237}
-      - {x: -255, y: -239}
-      - {x: -253, y: -242}
-      - {x: -251, y: -246}
-      - {x: -245, y: -251}
-      - {x: -244, y: -251}
-      - {x: -239, y: -255}
-      - {x: -237, y: -255}
-      - {x: -236, y: -256}
-      - {x: 236, y: -256}
-      - {x: 237, y: -255}
-      - {x: 239, y: -255}
-      - {x: 242, y: -253}
+    outline: []
     physicsShape: []
   spritePackingTag: 
   userData: 
